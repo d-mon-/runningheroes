@@ -12,7 +12,7 @@ lancer la commande dans le terminal pour importer les utilisateurs dans la DB ru
 mongoimport /db runningheroes /c users /jsonArray /file {yourpath}users.json
 ```
 
-une fois les utilisateurs importés, rentrer dans le shell mongo en important les fonctions présent dans mongo_scripts/build.js, puis lancer-les:
+une fois les utilisateurs importés, rentrer dans le shell mongo en important les fonctions présent dans mongo_scripts/build.js, puis lancez-les:
 
 ```
 mongo {yourpath}build.js --shell
@@ -20,7 +20,7 @@ mongo {yourpath}build.js --shell
 >projection.project_user()
 ```
 
-Ces commandes vont modifier la structure des objets stockés dans la base de donnée en regroupant le champ latitude et longitude dans un même array geo:[\<lng\>,\<lat\>], pour ensuite créer un index 2dsphere. Ce qui va nous permettre de lancer les requêtes qui vont "capturer" les users les proches d'un point.
+Ces commandes vont modifier la structure des objets stockés dans la base de donnée en regroupant le champ latitude et longitude dans un même array geo:[\<lng\>,\<lat\>], pour ensuite créer un index 2dsphere. Ce qui va permettre de lancer les requêtes qui vont "capturer" les users les plus proches d'un point avec $near ou $geoNear.
 \<do not reinvent the wheel\>
 
 Il est aussi possible de remplacer le champ _id de mongo par l'email dans ce cas-ci. Ce que je n'ai pas fait. En revanche, j'ai créé un index qui garantie d'avoir un email unique. Si un jour, l'application a besoin de stocker plusieurs documents partageant la même adresse email, il suffira juste de supprimé l'index.
