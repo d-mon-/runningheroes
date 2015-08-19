@@ -6,7 +6,8 @@
     "start_production": "set NODE_ENV=production&& npm start",
     "start": "node ./bin/www",
     "test-unit": "jasmine-node test/unit",
-    "test-integration": "mocha test/integration"
+    "test-integration": "mocha test/integration",
+    "pre-install-test":"npm install mocha -g  && npm install jasmine-node -g"
   },
   "dependencies": {
     "body-parser": "~1.13.2",

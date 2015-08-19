@@ -16,12 +16,12 @@ une fois les utilisateurs importés, rentrer dans le shell mongo en important les
 
 ```
 mongo {yourpath}build.js --shell
-use runningheroes
-projection.project_user()
+>use runningheroes
+>projection.project_user()
 ```
 
-Ces commandes vont modifier la structure des objets stockés dans la base de donnée en regroupant le champ latitude et longitude dans un même array geo:[<lng>,<lat>], pour ensuite créer un index 2dsphere. Ce qui va nous permettre de lancer des requêtes nous permettans de "capturer" les users les proches d'un point triés du plus proche au plus éloigné.
-<do not reinvent the wheel>gt
+Ces commandes vont modifier la structure des objets stockés dans la base de donnée en regroupant le champ latitude et longitude dans un même array geo:[<lng>,<lat>], pour ensuite créer un index 2dsphere. Ce qui va nous permettre de lancer des requêtes nous permettant ainsi de "capturer" les users les proches d'un point.
+<do not reinvent the wheel>
 
 ```js
 //search all users whithin 20km
@@ -29,15 +29,44 @@ db.users.find({'locations.geo': { $near:{$geometry:{type:"point", coordinates:[2
 ```
 
 
+
+
 ##Lancer l'application
 deux environnements:
-pour l'environnement de developpement, utilisez:
+pour l'environnement de développement, utilisez:
 > npm run start
 
 pour l'environnement de production, utilisez (écriture des logs dans le dossier log):
 >npm run start_production
 
-Normalement je préfère logger les erreurs dans une collection special pour pouvoir les traiter par la suite. Ici, j'ai voulu tester la rotation des fichiers de logs avec winston.
+Normalement je préfère logger les erreurs dans une collection spécial pour pouvoir les traiter par la suite. Ici, j'ai voulu tester la rotation des fichiers de logs avec winston.
 
 
+##Test
+###pre-install
+lancer la commande suivante pour installer jasmine et mocha
+```
+npm run pre-install-test
+```
 
+cela va permettre de pouvoir lancer les différents tests.
+
+#####test unitaire:
+```
+    npm run test-unit
+```
+
+#####test d'integration:
+```
+    npm run test-integration
+```
+
+##enfin
+je n'utilise pas de cluster, il y a différentes stratégies pour le mettre en place, mais vu la tailler du projet je suis resté sur une architecture assez simple.
+
+de même pour l'ajout de coroutine avec co : [lien](https://github.com/tj/co)
+
+enfin, j'avais commencé à gérer l'internationalization avec une gestion de code d'erreurs qui requete sur la BDD selon l'user-agent ou le profil de l'utilisateur, mais au final vu que je n'utilise pas de navigateur (chrome -> postman ou ide->test restful service) et pas de page web, j'ai abandonné l'idée (pour le moment)
+
+pas de grunt, gulp ou webpack.
+jslint se gère directement dans mon IDE (intellij). et le reste se fait via npm.
