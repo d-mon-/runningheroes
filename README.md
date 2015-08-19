@@ -1,11 +1,11 @@
 # Running Heroes: interview
 
-#configuration
+##configuration
 
 support: mongoDB > 3.0 & nodeJS > 12.0
 
 
-###installation de la base de donnée
+###mise en place de la base de donnée
 lancer la commande dans le terminal pour importer les utilisateurs dans la DB runningheroes et la collection users:
 
 ```
@@ -21,7 +21,7 @@ projection.project_user()
 ```
 
 Ces commandes vont modifier la structure des objets stockés dans la base de donnée en regroupant le champ latitude et longitude dans un même array geo:[<lng>,<lat>], pour ensuite créer un index 2dsphere. Ce qui va nous permettre de lancer des requêtes nous permettans de "capturer" les users les proches d'un point triés du plus proche au plus éloigné.
-<do not reinvent the wheel>
+<do not reinvent the wheel>gt
 
 ```js
 //search all users whithin 20km
