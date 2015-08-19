@@ -20,8 +20,10 @@ mongo {yourpath}build.js --shell
 >projection.project_user()
 ```
 
-Ces commandes vont modifier la structure des objets stockés dans la base de donnée en regroupant le champ latitude et longitude dans un même array geo:[\<lng\>,\<lat\>], pour ensuite créer un index 2dsphere. Ce qui va nous permettre de lancer des requêtes nous permettant ainsi de "capturer" les users les proches d'un point.
-<do not reinvent the wheel>
+Ces commandes vont modifier la structure des objets stockés dans la base de donnée en regroupant le champ latitude et longitude dans un même array geo:[\<lng\>,\<lat\>], pour ensuite créer un index 2dsphere. Ce qui va nous permettre de lancer les requêtes qui vont "capturer" les users les proches d'un point.
+\<do not reinvent the wheel\>
+
+Il est aussi possible de remplacer le champ _id de mongo par l'email dans ce cas-ci. Ce que je n'ai pas fait. En revanche, j'ai créé un index qui garantie d'avoir un email unique. Si un jour, l'application a besoin de stocker plusieurs documents partageant la même adresse email, il suffira juste de supprimé l'index.
 
 ```js
 //search all users whithin 20km
@@ -37,7 +39,7 @@ pour l'environnement de développement, utilisez:
 pour l'environnement de production, utilisez (écriture des logs dans le dossier log):
 >npm run start_production
 
-Normalement je préfère logger les erreurs dans une collection spécial pour pouvoir les traiter par la suite. Ici, j'ai voulu tester la rotation des fichiers de logs avec winston.
+Normalement je préfère centraliser les logs et les erreurs dans une même database pour pouvoir les traiter par la suite. Ici, j'ai voulu tester la rotation des fichiers de logs avec winston.
 
 
 ##Test
@@ -64,7 +66,7 @@ je n'utilise pas de cluster, il y a différentes stratégies pour le mettre en pla
 
 de même pour l'ajout de coroutine avec co : [lien](https://github.com/tj/co)
 
-enfin, j'avais commencé à gérer l'internationalization avec une gestion de code d'erreurs qui requete sur la BDD selon l'user-agent ou le profil de l'utilisateur, mais au final vu que je n'utilise pas de page web(j'utilise postman et l'IDE pour les requetes), j'ai abandonné l'idée (pour le moment)
+enfin, j'avais commencé à gérer l'internationalization avec une gestion de code d'erreurs qui requete sur la BDD selon l'user-agent ou le profil de l'utilisateur (avec jwt), mais au final vu que je n'utilise pas de page web(j'utilise postman et l'IDE pour les requetes), j'ai abandonné l'idée (pour le moment)
 
 pas de grunt, gulp ou webpack (c'est utile pour développer le front-end que le back-end).
 jslint se gère directement dans mon IDE (intellij). et le reste se fait via npm.
