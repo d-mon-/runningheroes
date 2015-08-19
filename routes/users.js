@@ -8,6 +8,6 @@ var userController = require("../controller/user");
 router.get('/', userController.getClosestUsers);
 
 /* POST users */
-router.post('/',userController.insertUser);
+router.post('/', userController.insertUser);
 
 module.exports = router;
