@@ -29,8 +29,6 @@ db.users.find({'locations.geo': { $near:{$geometry:{type:"point", coordinates:[2
 ```
 
 
-
-
 ##Lancer l'application
 deux environnements:
 pour l'environnement de développement, utilisez:
@@ -66,7 +64,7 @@ je n'utilise pas de cluster, il y a différentes stratégies pour le mettre en pla
 
 de même pour l'ajout de coroutine avec co : [lien](https://github.com/tj/co)
 
-enfin, j'avais commencé à gérer l'internationalization avec une gestion de code d'erreurs qui requete sur la BDD selon l'user-agent ou le profil de l'utilisateur, mais au final vu que je n'utilise pas de navigateur (chrome -> postman ou ide->test restful service) et pas de page web, j'ai abandonné l'idée (pour le moment)
+enfin, j'avais commencé à gérer l'internationalization avec une gestion de code d'erreurs qui requete sur la BDD selon l'user-agent ou le profil de l'utilisateur, mais au final vu que je n'utilise pas de page web(j'utilise postman et l'IDE pour les requetes), j'ai abandonné l'idée (pour le moment)
 
-pas de grunt, gulp ou webpack (plus utile pour le front-end).
+pas de grunt, gulp ou webpack (c'est utile pour développer le front-end que le back-end).
 jslint se gère directement dans mon IDE (intellij). et le reste se fait via npm.
