@@ -13,7 +13,7 @@ var users = require('./routes/users');
 var app = express();
 
 /**
- * allow the application to reconnect in case of errors.
+ * allow the application to reconnect in case of errors. *
  * @function connection
  * @todo change url if the environment is equal to dev, test or production
  */

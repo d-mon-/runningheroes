@@ -43,13 +43,14 @@ function validateLabel(val) {
 }
 
 /**
+ *
  * @constructor
  */
 var userSchema = new Schema({
-    'email': {type: String, validate: [validateEmail, "email invalid"]},
+    'email': {type: String, require: true, validate: [validateEmail, "email invalid"]},
     'locations': {
-        'label': {type: String, validate: [validateLabel, "label invalid"]},
-        'geo': {type: [Number], validate: [validateGeoValue, "invalid coordinates"]}
+        'label': {type: String, require: true, validate: [validateLabel, "label invalid"]},
+        'geo': {type: [Number], require: true, validate: [validateGeoValue, "invalid coordinates"]}
     }
 }, { autoIndex: false});
 

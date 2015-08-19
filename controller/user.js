@@ -11,6 +11,7 @@ var logger = require('../lib/logger')(process.env.NODE_ENV || 'development');
 /**
  * retrieve users within 20km from a tuple of longitude and latitude
  * in <users> collection
+ *
  * @param req
  * @param res
  * @TODO : use coroutine: {@link https://github.com/tj/co}
@@ -40,6 +41,7 @@ exports.getClosestUsers = function (req, res) {
 
 /**
  * Insert a single user in <users> collection
+ *
  * @param req
  * @param res
  * @param next

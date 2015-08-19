@@ -2,9 +2,8 @@
  * Created by GUERIN Olivier, on 19/08/2015.
  * Twitter: @MisterRaton
  */
-
+'use strict';
 var is = require('../../lib/is');
-
 
 describe("is", function () {
     describe("aLatitude", function () {

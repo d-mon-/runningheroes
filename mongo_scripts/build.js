@@ -21,10 +21,10 @@ var projection = {
 		},
         'create_indexes': function create_indexes() {
         //it is not ensureIndex anymore in mongo 3.0
-		     var r = db.users.createIndex({'locations.geo': "2dsphere"});
-		     printjson(r);
-		     r = db.users.createIndex({'email': 1 }, {unique: true});
-			 printjson(r);
+            var r = db.users.createIndex({'locations.geo': "2dsphere"});
+            printjson(r);
+		    r = db.users.createIndex({'email': 1 }, {unique: true});
+			printjson(r);
         }
     }
 

@@ -2,7 +2,7 @@
  * Created by GUERIN Olivier, on 19/08/2015.
  * Twitter: @MisterRaton
  */
-
+'use strict';
 
 var application = require('../../app');
 var supertest = require("supertest");
@@ -12,8 +12,6 @@ var User = mongoose.model('users');
 /**
  * @todo use another db + use fixture in large project
  */
-
-
 describe("GET /users/", function () {
     it("should respond with a list of users", function (done) {
         supertest(application)
@@ -47,8 +45,6 @@ describe("GET /users/", function () {
             });
     });
 });
-
-
 
 describe("POST /users/", function () {
     beforeEach(function (done) {
