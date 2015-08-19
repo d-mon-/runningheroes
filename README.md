@@ -20,7 +20,7 @@ mongo {yourpath}build.js --shell
 >projection.project_user()
 ```
 
-Ces commandes vont modifier la structure des objets stockés dans la base de donnée en regroupant le champ latitude et longitude dans un même array geo:[<lng>,<lat>], pour ensuite créer un index 2dsphere. Ce qui va nous permettre de lancer des requêtes nous permettant ainsi de "capturer" les users les proches d'un point.
+Ces commandes vont modifier la structure des objets stockés dans la base de donnée en regroupant le champ latitude et longitude dans un même array geo:[\<lng\>,\<lat\>], pour ensuite créer un index 2dsphere. Ce qui va nous permettre de lancer des requêtes nous permettant ainsi de "capturer" les users les proches d'un point.
 <do not reinvent the wheel>
 
 ```js
