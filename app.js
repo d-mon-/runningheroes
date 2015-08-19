@@ -4,13 +4,30 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var fs = require('fs');
+var morgan = require('morgan');
+var mongoose = require('mongoose');
+var model = require('./model/user.js');
+
+//routers
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var morgan = require('morgan');
 
 var app = express();
-var logger = require('./logger.js')(app);
+
+// Connect to mongodb
+var connect = function () {
+  var db;
+  if (app.get('env') === 'development') {
+    db='mongodb://localhost/runningheroes';
+  }else{
+    db='mongodb://localhost/runningheroes';
+  }
+  var options = { server: { socketOptions: { keepAlive: 1 } } };
+  mongoose.connect(db, options);
+};
+connect();
+mongoose.connection.on('error', console.log);
+mongoose.connection.on('disconnected', connect);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,17 +35,20 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-console.log(logger.stream);
+var logger = require('./logger.js')(app.get('env'));
 app.use(morgan("combined",{"stream": logger.stream }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

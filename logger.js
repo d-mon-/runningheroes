@@ -5,13 +5,13 @@
 'use strict';
 var winston = require('winston');
 
-module.exports = function(app){
+module.exports = function(environment){
     var logger;
-    if (app.get('env') === 'production'){
-        logger = new (winston.Logger)({
+    if (environment === 'production'){
+        logger = new winston.Logger({
             exitOnError: false,
             transports: [
-                new (winston.transports.DailyRotateFile)({
+                new winston.transports.DailyRotateFile({
                     filename: 'runningheroes-log',
                     dirname: __dirname + '/log',
                     datePattern: 'yyyy-MM-dd',
@@ -19,7 +19,7 @@ module.exports = function(app){
                     handleExceptions: true,
                     json: true
                 }),
-                new (winston.transports.Console)({
+                new winston.transports.Console({
                     colorize: true,
                     handleExceptions: true,
                     timestamp: true
@@ -27,10 +27,10 @@ module.exports = function(app){
             ]
         });
     }else {
-        logger = new (winston.Logger)({
+        logger = new winston.Logger({
             exitOnError: false,
             transports: [
-                new (winston.transports.Console)({
+                new winston.transports.Console({
                     colorize: true,
                     handleExceptions: true,
                     timestamp: true

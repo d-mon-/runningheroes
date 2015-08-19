@@ -1,6 +1,6 @@
 # Intellij
 node_modules/
-log/
+log/*
 .idea/
 *.iml
 *.iws

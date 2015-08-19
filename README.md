@@ -12,7 +12,7 @@ lancer la commande dans le terminal pour importer les utilisateurs dans la DB ru
 mongoimport /db runningheroes /c users /jsonArray /file {yourpath}users.json
 ```
 
-une fois les utilisateurs importés, rentrer dans le shell mongo en important les fonctions présent dans configuration/build.js, puis lancer-les:
+une fois les utilisateurs importés, rentrer dans le shell mongo en important les fonctions présent dans mongo_scripts/build.js, puis lancer-les:
 
 ```
 mongo {yourpath}build.js --shell
@@ -27,3 +27,17 @@ Ces commandes vont modifier la structure des objets stockés dans la base de donn
 //search all users whithin 20km
 db.users.find({'locations.geo': { $near:{$geometry:{type:"point", coordinates:[2.3522219000000177, 48.856614]}, $maxDistance : 20000 }}});
 ```
+
+
+##Lancer l'application
+deux environnements:
+pour l'environnement de developpement, utilisez:
+> npm run start
+
+pour l'environnement de production, utilisez (écriture des logs dans le dossier log):
+>npm run start_production
+
+Normalement je préfère logger les erreurs dans une collection special pour pouvoir les traiter par la suite. Ici, j'ai voulu tester la rotation des fichiers de logs avec winston.
+
+
+
