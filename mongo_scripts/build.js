@@ -19,11 +19,13 @@ var projection = {
 			_user.__writeResult = _r;
 	 		printjson(_user);
 		}
-		this.create_users_index();
+		this.create_indexes();
 	},
-	'create_users_index':function create_users_index(){
-		//it is not ensureIndex in mongo 3.0
+	'create_indexes':function create_indexes(){
+		//it is not ensureIndex anymore in mongo 3.0
 		var _r = db.users.createIndex({'locations.geo':"2dsphere"});
+		printjson(_r);
+		_r = db.users.createIndex({'email':1},{unique:true});
 		printjson(_r);
  	}
 }
