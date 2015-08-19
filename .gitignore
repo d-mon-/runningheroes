@@ -1,5 +1,7 @@
 # Intellij
 node_modules/
+log/
 .idea/
 *.iml
 *.iws
+*.log

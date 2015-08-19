@@ -16,5 +16,9 @@
     "serve-favicon": "~2.3.0",
     "winston": "^1.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "scripts":{
+    "start_production": "set NODE_ENV=production&& npm start",
+    "start":  "node ./bin/www"
+  }
 }

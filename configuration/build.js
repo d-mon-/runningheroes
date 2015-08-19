@@ -7,12 +7,14 @@ var projection = {
 		//We only want to change data that store both: lat and lng
 		var _users = db.users.find({'locations.lng':{$exists:true},'locations.lat':{$exists:true}});
 		while(_users.hasNext()){
-	 		var _user = _users.next();	 		
-         		_user.locations.geo = [];
-         		_user.locations.geo[0] = _user.locations.lng;
-	 		_user.locations.geo[1] = _user.locations.lat;
+	 		var _user = _users.next();
+
+			_user.locations.geo = [];
+			_user.locations.geo[0] = _user.locations.lng;
+			_user.locations.geo[1] = _user.locations.lat;
   	 		delete _user.locations.lng;
 	 		delete _user.locations.lat;
+
 	 		var _r = db.users.save(_user);
 			_user.__writeResult = _r;
 	 		printjson(_user);
