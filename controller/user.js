@@ -10,11 +10,12 @@ var logger = require('../lib/logger')(process.env.NODE_ENV || 'development');
 
 /**
  * retrieve users within 20km from a tuple of longitude and latitude
- * in <users> collection
- *
+ * in <users> collection.
+ * /!\use $geoNear hover $near in case of sharding. however, its size is limited to 16MB
+ * req.body -> {lat:{string},lng:{string}}
  * @param req
  * @param res
- * @TODO : use coroutine: {@link https://github.com/tj/co}
+ * @todo : use coroutine: {@link https://github.com/tj/co}
  */
 exports.getClosestUsers = function (req, res) {
     var coord = [], point;
@@ -41,7 +42,7 @@ exports.getClosestUsers = function (req, res) {
 
 /**
  * Insert a single user in <users> collection
- *
+ * req.body->{email:{string},label:{string},lng:{string},lat:{string}}
  * @param req
  * @param res
  * @param next

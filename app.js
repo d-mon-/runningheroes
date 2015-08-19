@@ -27,7 +27,7 @@ mongoose.connection.on('disconnected', connection);
 
 //logger
 var logger = require('./lib/logger')(app.get('env'));
-app.use(morgan("combined",{"stream": logger.stream }));
+app.use(morgan("combined", {"stream": logger.stream }));
 
 //body-parser
 app.use(bodyParser.json());

@@ -53,12 +53,12 @@ cela va permettre de pouvoir lancer les différents tests.
 
 #####test unitaire:
 ```
-    npm run test-unit
+npm run test-unit
 ```
 
 #####test d'integration:
 ```
-    npm run test-integration
+npm run test-integration
 ```
 
 ##enfin
@@ -68,5 +68,5 @@ de même pour l'ajout de coroutine avec co : [lien](https://github.com/tj/co)
 
 enfin, j'avais commencé à gérer l'internationalization avec une gestion de code d'erreurs qui requete sur la BDD selon l'user-agent ou le profil de l'utilisateur, mais au final vu que je n'utilise pas de navigateur (chrome -> postman ou ide->test restful service) et pas de page web, j'ai abandonné l'idée (pour le moment)
 
-pas de grunt, gulp ou webpack.
+pas de grunt, gulp ou webpack (plus utile pour le front-end).
 jslint se gère directement dans mon IDE (intellij). et le reste se fait via npm.
