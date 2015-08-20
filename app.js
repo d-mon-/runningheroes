@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
-
+var logger = require('./lib/logger')(process.env.NODE_ENV);
 //require: models
 var model = require('./model/user');
 
@@ -18,15 +18,15 @@ var app = express();
  * @todo change url if the environment is equal to dev, test or production
  */
 var connection = function () {
+    console.log(process.env.DB_PATH);
     var options = { server: { socketOptions: { keepAlive: 1 } } };
-    mongoose.connect('mongodb://localhost/runningheroes', options);
+    mongoose.connect('mongodb://localhost/' + process.env.DB_PATH, options);
 };
 connection();
 mongoose.connection.on('error', console.log);
 mongoose.connection.on('disconnected', connection);
 
 //logger
-var logger = require('./lib/logger')(app.get('env'));
 app.use(morgan("combined", {"stream": logger.stream }));
 
 //body-parser

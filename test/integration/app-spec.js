@@ -4,15 +4,37 @@
  */
 'use strict';
 
+process.env.DB_PATH = 'runningheroes_test';
 var application = require('../../app');
 var supertest = require("supertest");
 var assert = require("assert");
 var mongoose = require("mongoose");
 var User = mongoose.model('users');
+var cleaner = require('./fixture/clean.js');
+var usersList = require('./fixture/users.js');
+var MongoDB = require('mongodb').Db;
+var Server = require('mongodb').Server;
+var db = new MongoDB(process.env.DB_PATH, new Server('localhost', 27017));
+
+
 /**
  * @todo use another db + use fixture in large project
  */
 describe("GET /users/", function () {
+    before(function (done) {
+        //callback HELL -> use coroutine
+        db.open(function (err, db) {
+            if (err) {
+                done(err);
+            }
+            cleaner.run(db.collection('users'), usersList, [{field: {'locations.geo': "2dsphere"}}, {
+                field: {'email': 1},
+                option: {unique: true}
+            }], done);
+        });
+    });
+
+
     it("should respond with a list of users", function (done) {
         supertest(application)
             .get('/users/')
@@ -47,12 +69,17 @@ describe("GET /users/", function () {
 });
 
 describe("POST /users/", function () {
-    beforeEach(function (done) {
-        User.remove({"email": "core@runningheroes.com"}, function (err) {
+    before(function (done) {
+        User.remove({}, function (err) {
             if (err) {
                 return done(err);
             }
-            done();
+            User.create(usersList, function (err) {
+                if (err) {
+                    return done(err);
+                }
+                done();
+            });
         });
     });
 

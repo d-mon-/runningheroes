@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start_production": "set NODE_ENV=production&& npm start",
-    "start": "node ./bin/www",
+    "start_production": "set DB_PATH=runningheroes&&set NODE_ENV=production&& npm run start",
+    "start": "set DB_PATH=runningheroes&&npm run set_db&&node ./bin/www",
     "test-unit": "jasmine-node test/unit",
-    "test-integration": "mocha test/integration",
-    "pre-install-test":"npm install mocha -g  && npm install jasmine-node -g"
+    "test-integration": "set DB_PATH=runningheroes_test&&mocha test/integration",
+    "pre-install-test": "npm install mocha -g  && npm install jasmine-node -g"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -23,6 +23,7 @@
   "devDependencies": {
     "assert": "^1.3.0",
     "mocha": "^2.2.5",
+    "mongodb": "^2.0.42",
     "supertest": "^1.0.1"
   }
 }
