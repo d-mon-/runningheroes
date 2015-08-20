@@ -9,12 +9,17 @@
  */
 module.exports = {
     /**
-     * run all functions
+     * run all functions to clean, insert and add indexes to database
+     * @exemple cleaner.run(db.collection('users'), usersList, [{field: {'locations.geo': "2dsphere"}}, {
+                field: {'email': 1},
+                option: {unique: true}
+            }], done);
      * @function
      * @param collection
      * @param fixture
      * @param indexes
      * @param cb
+     * @todo coroutine
      */
     run: function run(collection, fixture, indexes, cb) {
         var self = this;
@@ -32,6 +37,13 @@ module.exports = {
             }
         });
     },
+
+    /**
+     * @function
+     * @param collection
+     * @param cb
+     * @param cb2
+     */
     dropCollection: function dropCollection(collection, cb, cb2) {
         collection.drop(function (err) {
             if (err) {
@@ -41,6 +53,13 @@ module.exports = {
             }
         });
     },
+    /**
+     * @function
+     * @param collection
+     * @param fixture
+     * @param cb
+     * @param cb2
+     */
     insertFixture: function insertFixture(collection, fixture, cb, cb2) {
         collection.insert(fixture, function (err) {
             if (err) {
@@ -50,6 +69,12 @@ module.exports = {
             }
         });
     },
+    /**
+     * @function
+     * @param collection
+     * @param indexes
+     * @param cb
+     */
     createIndexes: function createIndexes(collection, indexes, cb) {
         var index = indexes.pop(),
             fields = index.field,

@@ -4,7 +4,12 @@
  */
 'use strict';
 
-process.env.DB_PATH = 'runningheroes_test';
+//make sure we don't hit the database in production
+var regex = /_test$/i;
+if (!regex.test(process.env.DB_PATH)) {
+    process.env.DB_PATH = process.env.DB_PATH + '_test';
+}
+
 var application = require('../../app');
 var supertest = require("supertest");
 var assert = require("assert");

@@ -18,7 +18,6 @@ var app = express();
  * @todo change url if the environment is equal to dev, test or production
  */
 var connection = function () {
-    console.log(process.env.DB_PATH);
     var options = { server: { socketOptions: { keepAlive: 1 } } };
     mongoose.connect('mongodb://localhost/' + process.env.DB_PATH, options);
 };
